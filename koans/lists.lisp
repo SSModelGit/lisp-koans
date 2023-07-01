@@ -29,7 +29,7 @@
     ;; Try filling in the below blanks in different ways.
     (assert-equal '(orange pomello clementine) fruits)
     (assert-equal `(,(* 2 1) ,(* 2 2) 6) some-evens)
-    (assert-equal (cons (first long-numbers) (cons (second long-numbers) (cons (third long-numbers)))) long-numbers)
+    (assert-equal (cons (first long-numbers) (cons (second long-numbers) (cons (third long-numbers) nil))) long-numbers)
     (assert-equal '("Matthew" . ("Mark" . ("Margaret" . nil))) names)))
 
 (define-test cons-tructing-lists
@@ -57,11 +57,11 @@
   ;; cons structure.
   (let ((structure '((1 2) (("foo" . "bar")))))
     (assert-equal '(1 2) (car structure))
-    (assert-equal '(("foo" "bar")) (car (cdr structure)))
+    (assert-equal '(("foo" . "bar")) (car (cdr structure)))
     (assert-equal "bar" (cdr (car (car (cdr structure)))))
     ;; Lisp defines shorthand functions for up to four such nested calls.
     (assert-equal '(1 2) (car structure))
-    (assert-equal '(("foo" "bar")) (cadr structure))
+    (assert-equal '(("foo" . "bar")) (cadr structure))
     (assert-equal "bar" (cdaadr structure))))
 
 (define-test push-pop
